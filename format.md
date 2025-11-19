@@ -51,8 +51,6 @@ data[1] = number >> 8 | 0xC0;
   * end job
 * `78 01 20` - "x"
   * dunno, unused by Linux driver
-
-## possible
 * `43 01 ??` - "C"
   * darkness
   * 0-14, which translates to darkness 1-15 on the printer
@@ -73,29 +71,23 @@ data[1] = number >> 8 | 0xC0;
     * DPI * gapInfo2 / 25.4 + 0.5
 
 
+## additonal setting not yet discovered
 
-cont gap black 
+Printer have additional settigns which might be accessible from the format level
 
- auto feed 
- motorr max eco
- shutoff 15 30 6650 1 2 4 8 5 10 notif saound dis en
+* auto feed  on, off
+* motor speed: max, eco
+* shutoff: 5/10/15/30min, 1/2/4/8h1
+* notifiocation sounds: on, off
+* language: english, chinese
 
- lang en zh
+## Typical job from Linux cups filter
 
- DP30S
-
+```text
 1F 20 00 88             -   begin job
 1F 78 01 20 88          -   always the same, unknown
 1F 27 01 48 88          -   page width in bytes (e.g. 72), confirmed
-1F 25                   - max maxSFDots, maxLEDots
+1F 25 ...               - max maxSFDots, maxLEDots
 data..., 21/22 till the end
-1F 22 
-1F 28 
-
-
-# Append file
- Most importent
-# PushPageEnd
-* 20 - "" - start job
-* 
-
+1F 28 00 88             - end job
+```
