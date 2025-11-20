@@ -43,7 +43,7 @@ data[1] = number >> 8 | 0xC0;
   * PP is position, how many bytes were omitted at the start, so you can skip every 8 pixels
   * data is just bitmap of pixels, max 72 bytes
   * min 3 bytes, max 74
-* `22 EB DD` `22 01 1B` - """
+* `22 EB DD` - """
   * empty line
   * DD - number of empty lines minus 1
   * EBV encoded
@@ -51,15 +51,15 @@ data[1] = number >> 8 | 0xC0;
   * end job
 * `78 01 20` - "x"
   * dunno, unused by Linux driver
-* `43 01 ??` - "C"
-  * darkness
+* `43 01 DA` - "C"
+  * DA - darkness
   * 0-14, which translates to darkness 1-15 on the printer
   * printer GUI only allows setting darkness between 6-15
-* `44 01 ??` - "D"
-  * speed
+* `44 01 SP` - "D"
+  * SP - speed
   * 0-4, which translates to speed 1-5 on the printer
-* `42 01 ??` - "B"
-  * gap info
+* `42 01 GI` - "B"
+  * GI - gap info
   * 0 - continous
   * 1 - gap, or simply separate labels
   * 2 - gap, same as 1
